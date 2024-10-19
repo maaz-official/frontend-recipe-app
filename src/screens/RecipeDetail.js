@@ -1,38 +1,33 @@
-// src/components/RecipeDetail.js
 import React, { useState } from "react";
 import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
-import Swiper from "react-native-swiper"; // Import Swiper
-import tw from "twrnc"; // Import Tailwind CSS utility
-import Icon from "react-native-vector-icons/FontAwesome"; // Import FontAwesome icons
-import BottomMenu from "../components/BottomMenu"; // Import BottomMenu
+import Swiper from "react-native-swiper";
+import tw from "twrnc"; 
+import Icon from "react-native-vector-icons/FontAwesome"; 
+import BottomMenu from "../components/BottomMenu"; 
 
 const RecipeDetail = ({ route, navigation }) => {
   const { recipe } = route.params;
   const [isFavorited, setIsFavorited] = useState(false);
 
-  // Toggle favorite status
   const handleFavorite = () => {
     setIsFavorited(!isFavorited);
     console.log("Recipe favorited:", recipe.title);
   };
 
-  // Handle social sharing
   const handleShare = (platform) => {
     console.log("Sharing to:", platform);
-    // Implement your share functionality here
   };
 
   return (
     <View style={tw`flex-1 bg-white`}>
       <ScrollView style={tw`p-4`}>
-        {/* Swiper for Images Section */}
         <Swiper
-          style={tw`h-64`} // Height for the swiper
+          style={tw`h-64`}
           showsButtons={true}
-          autoplay={true} // Enable autoplay
-          dotStyle={tw`bg-gray-300`} // Style for inactive dots
-          activeDotStyle={tw`bg-blue-500`} // Style for active dot
-          paginationStyle={tw`bottom-5`} // Position for pagination dots
+          autoplay={true}
+          dotStyle={tw`bg-gray-300`}
+          activeDotStyle={tw`bg-blue-500`}
+          paginationStyle={tw`bottom-5`}
         >
           {recipe.recipesImages && recipe.recipesImages.length > 0 ? (
             recipe.recipesImages.map((img, index) => (
@@ -40,19 +35,18 @@ const RecipeDetail = ({ route, navigation }) => {
                 key={index}
                 source={{ uri: img }}
                 style={tw`w-full h-full rounded-lg`}
-                resizeMode="cover" // Ensure images cover the area nicely
+                resizeMode="cover"
               />
             ))
           ) : (
             <Image
-              source={{ uri: "default_image_url_here" }} // Use a default image if no images are available
+              source={{ uri: "default_image_url_here" }}
               style={tw`w-full h-full rounded-lg`}
               resizeMode="cover"
             />
           )}
         </Swiper>
 
-        {/* Recipe Description and Details */}
         <Text style={tw`mt-4 text-2xl font-bold text-gray-800`}>
           {recipe.title || "Untitled Recipe"}
         </Text>
@@ -78,12 +72,10 @@ const RecipeDetail = ({ route, navigation }) => {
           </Text>
         </Text>
 
-        {/* Heading for Social Sharing */}
         <Text style={tw`mt-6 text-lg font-semibold text-gray-800`}>
           Share Our Recipes:
         </Text>
-        <View style={tw`flex-row mt-2 gap-13`}>
-          {/* Favorite Button */}
+        <View style={tw`flex-row mt-2 gap-4`}>
           <TouchableOpacity
             onPress={handleFavorite}
             style={tw`p-2 rounded-lg hover:bg-gray-200`}
@@ -94,6 +86,7 @@ const RecipeDetail = ({ route, navigation }) => {
               color={isFavorited ? "red" : "gray"}
             />
           </TouchableOpacity>
+          {/* Other social media buttons with text wrapped */}
           <TouchableOpacity
             onPress={() => handleShare("facebook")}
             style={tw`p-2 rounded-lg hover:bg-gray-200`}
@@ -114,7 +107,6 @@ const RecipeDetail = ({ route, navigation }) => {
           </TouchableOpacity>
         </View>
 
-        {/* Ingredients Section */}
         <Text style={tw`mt-6 text-lg font-semibold text-gray-800`}>
           Ingredients:
         </Text>
@@ -131,7 +123,6 @@ const RecipeDetail = ({ route, navigation }) => {
           )}
         </View>
 
-        {/* Instructions Section */}
         <Text style={tw`mt-6 text-lg font-semibold text-gray-800`}>
           Instructions:
         </Text>
@@ -151,7 +142,6 @@ const RecipeDetail = ({ route, navigation }) => {
         </View>
       </ScrollView>
 
-      {/* BottomMenu added here */}
       <BottomMenu navigation={navigation} />
     </View>
   );
