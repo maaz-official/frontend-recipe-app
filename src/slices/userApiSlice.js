@@ -1,12 +1,13 @@
 // src/slices/userSlice.js
 import { apiSlice } from './apiSlice';
+import { USER_URL } from '../utils/constant'; // Ensure correct import of USER_URL
 
 // Inject endpoints for user actions
 export const userSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         loginUser: builder.mutation({
             query: (credentials) => ({
-                url: '/auth/login',
+                url: `${USER_URL}/login`, // Use USER_URL as prefix
                 method: 'POST',
                 body: credentials,
             }),
@@ -14,13 +15,13 @@ export const userSlice = apiSlice.injectEndpoints({
         }),
         logoutUser: builder.mutation({
             query: () => ({
-                url: '/auth/logout',
+                url: `${USER_URL}/auth/logout`, // Use USER_URL as prefix
                 method: 'POST',
             }),
             invalidatesTags: ['User'],
         }),
         getUserProfile: builder.query({
-            query: () => '/auth/profile',
+            query: () => `${USER_URL}/auth/profile`, // Use USER_URL as prefix
             providesTags: ['User'],
         }),
     }),

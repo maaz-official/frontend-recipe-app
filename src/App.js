@@ -6,21 +6,24 @@ import Sidebar from './Components/Sidebar';
 import Header from './Components/Header';
 import ListAllRecipes from './Admin/ListAllRecipes';
 import EditRecipe from './Admin/EditRecipe';
+import CreateTag from './Admin/CreateTag';
+import Login from './Admin/LoginScreen';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="flex">
-      <Header />
-
-        <div className="flex-grow ml-20"> {/* Adjust margin when sidebar is closed */}
+        <Header />
+        <div className="flex-grow ml-20">
           <Sidebar />
-          <div className="pt-16"> {/* Add padding-top to avoid content being hidden behind the header */}
+          <div className="pt-16">
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path='/recipes' element={<ListAllRecipes />} />
-              <Route path="/edit-recipe/:id" element={<EditRecipe />} /> {/* Define the edit route */}
+              <Route path="/recipes" element={<ListAllRecipes />} />
+              <Route path="/edit-recipe/:id" element={<EditRecipe />} />
               <Route path="/create" element={<CreateRecipe />} />
+              <Route path="/create/tag" element={<CreateTag />} />
+              <Route path="/login" element={<Login />} /> {/* Login route */}
             </Routes>
           </div>
         </div>
